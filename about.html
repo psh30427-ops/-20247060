@@ -51,8 +51,16 @@
                         </ul>
                     </div>
                     <div class="about-image">
-                        <div class="image-placeholder water-bg">
-                            <i class="fa-solid fa-droplet"></i>
+                        <div class="interactive-16-9-container" id="about-image-container">
+                            <img src="about-image.png" alt="(주) 비에이텍 서비스 소개" class="scrolling-img" id="about-scrolling-img">
+                            <div class="container-overlay">
+                                <div class="zoom-icon">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                </div>
+                            </div>
+                            <div class="hover-badge">
+                                <i class="fa-solid fa-arrows-up-down"></i> 마우스를 올리면 스크롤됩니다 (클릭 시 크게 보기)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,6 +87,21 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal">
+        <div class="lightbox-content-wrapper">
+            <button id="lightbox-close" class="lightbox-close-btn" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="lightbox-scroll-container">
+                <img src="about-image.png" alt="(주) 비에이텍 서비스 소개 상세" class="lightbox-img">
+            </div>
+            <div class="lightbox-caption">
+                (주) 비에이텍 서비스 소개 상세 (마우스 스크롤하여 전체 보기)
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
