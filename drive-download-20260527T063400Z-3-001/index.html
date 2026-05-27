@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주) 비에이텍 | 메인 랜딩페이지</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><i class="fa-solid fa-water"></i> (주) 비에이텍</a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html" class="active">홈</a></li>
+                    <li><a href="about.html">회사소개</a></li>
+                    <li><a href="history.html">업력</a></li>
+                    <li><a href="facilities.html">장비/시설</a></li>
+                    <li><a href="location.html">오시는 길</a></li>
+                    <li><a href="contact.html">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content reveal">
+                <h1>생명의 근원, <br><span class="highlight">깨끗한 물</span>을 지키는 기술</h1>
+                <p>워터펌프 제작, 설치, 수리 전문기업.<br>(주) 비에이텍이 최고의 기술력으로 함께합니다.</p>
+                <a href="contact.html" class="btn btn-primary">견적 문의하기</a>
+            </div>
+            <div class="wave-container">
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+                    </g>
+                </svg>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fa-solid fa-water"></i> (주) 비에이텍</h2>
+                    <p>맑고 깨끗한 물의 흐름, 비에이텍이 만듭니다.</p>
+                </div>
+                <div class="footer-info">
+                    <p>상호명: (주) 비에이텍</p>
+                    <p>주소: 춘천시 퇴계로 1번지</p>
+                    <p>TEL: 033-248-1111 | FAX: 033-248-1234 | 담당자: aaa@naver.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 (주) 비에이텍. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

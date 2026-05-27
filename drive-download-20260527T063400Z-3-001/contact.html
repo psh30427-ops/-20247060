@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주) 비에이텍 | 문의하기</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><i class="fa-solid fa-water"></i> (주) 비에이텍</a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="about.html">회사소개</a></li>
+                    <li><a href="history.html">업력</a></li>
+                    <li><a href="facilities.html">장비/시설</a></li>
+                    <li><a href="location.html">오시는 길</a></li>
+                    <li><a href="contact.html" class="active">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>문의하기</h2>
+                    <p>펌프 제작, 설치, 수리 등 무엇이든 문의해주세요.</p>
+                </div>
+                <div class="contact-container grid-2 reveal">
+                    <div class="contact-details">
+                        <div class="contact-card">
+                            <i class="fa-solid fa-phone"></i>
+                            <h3>전화 문의</h3>
+                            <p>033-123-4567</p>
+                            <span>평일 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</span>
+                        </div>
+                        <div class="contact-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <h3>이메일 문의</h3>
+                            <p>info@batech.co.kr</p>
+                            <span>24시간 접수 가능, 확인 후 답변 드립니다.</span>
+                        </div>
+                    </div>
+                    <form class="contact-form" onsubmit="event.preventDefault(); alert('문의가 성공적으로 접수되었습니다. 담당자가 곧 연락드리겠습니다.');">
+                        <div class="form-group">
+                            <label for="name">이름 / 회사명</label>
+                            <input type="text" id="name" name="name" required placeholder="홍길동 / (주)OO기업">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">연락처</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">문의 유형</label>
+                            <select id="type" name="type">
+                                <option value="manufacture">펌프 제작/구매</option>
+                                <option value="install">설치 문의</option>
+                                <option value="repair">A/S 및 수리</option>
+                                <option value="other">기타 문의</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">문의 내용</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="문의하실 내용을 상세히 적어주세요."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">문의 접수하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fa-solid fa-water"></i> (주) 비에이텍</h2>
+                    <p>맑고 깨끗한 물의 흐름, 비에이텍이 만듭니다.</p>
+                </div>
+                <div class="footer-info">
+                    <p>상호명: (주) 비에이텍 | 대표자: 홍길동</p>
+                    <p>사업자등록번호: 123-45-67890</p>
+                    <p>주소: 강원특별자치도 춘천시 중앙로 1</p>
+                    <p>TEL: 033-123-4567 | FAX: 033-123-4568 | 이메일: info@batech.co.kr</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 (주) 비에이텍. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
