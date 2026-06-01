@@ -42,69 +42,110 @@ document.addEventListener("DOMContentLoaded", () => {
         revealElements.forEach(el => observer.observe(el));
     }
 
-    // 3. About Image 16:9 Hover Scrolling Logic
-    const imageContainer = document.getElementById("about-image-container");
-    const scrollingImg = document.getElementById("about-scrolling-img");
+    // 3. Dynamic Interactive Scrolling Images & Lightbox
+    const scrollingContainers = document.querySelectorAll(".interactive-16-9-container");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxClose = document.getElementById("lightbox-close");
+    const lightboxScrollContainer = document.querySelector(".lightbox-scroll-container");
+    const lightboxCaption = document.querySelector(".lightbox-caption");
 
-    if (imageContainer && scrollingImg) {
-        // Adjust scroll transition speed and value dynamically based on image height
+    // Recalculate scrolling speed and setup listeners for each scrolling container
+    scrollingContainers.forEach(container => {
+        const img = container.querySelector(".scrolling-img");
+        if (!img) return;
+
         const calculateAndScroll = () => {
-            const containerHeight = imageContainer.clientHeight;
-            const imgHeight = scrollingImg.clientHeight;
+            const containerHeight = container.clientHeight;
+            const imgHeight = img.clientHeight;
             const scrollDistance = imgHeight - containerHeight;
 
             if (scrollDistance > 0) {
-                // Determine a proportional transition duration (approx 1s per 120px)
                 const duration = Math.max(4, Math.min(12, scrollDistance / 120));
-                scrollingImg.style.transitionDuration = `${duration}s`;
+                img.style.transitionDuration = `${duration}s`;
 
-                imageContainer.onmouseenter = () => {
-                    scrollingImg.style.transform = `translateY(-${scrollDistance}px)`;
+                container.onmouseenter = () => {
+                    img.style.transform = `translateY(-${scrollDistance}px)`;
                 };
-                imageContainer.onmouseleave = () => {
-                    scrollingImg.style.transform = 'translateY(0)';
+                container.onmouseleave = () => {
+                    img.style.transform = 'translateY(0)';
                 };
             }
         };
 
-        // Recalculate on image load or window resize
-        if (scrollingImg.complete) {
+        if (img.complete) {
             calculateAndScroll();
         } else {
-            scrollingImg.addEventListener("load", calculateAndScroll);
+            img.addEventListener("load", calculateAndScroll);
         }
         window.addEventListener("resize", calculateAndScroll);
 
-        // 4. Lightbox Modal Interaction
-        const lightbox = document.getElementById("lightbox");
-        const lightboxClose = document.getElementById("lightbox-close");
+        // Lightbox trigger for scrolling images
+        if (lightbox && lightboxScrollContainer) {
+            container.addEventListener("click", () => {
+                // Clear any dynamic content
+                lightboxScrollContainer.innerHTML = '';
+                // Re-create the image inside container
+                const newImg = document.createElement("img");
+                newImg.src = img.src;
+                newImg.alt = img.alt;
+                newImg.className = "lightbox-img";
+                lightboxScrollContainer.appendChild(newImg);
 
-        if (lightbox && lightboxClose) {
-            imageContainer.addEventListener("click", () => {
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = img.alt + " 상세 (마우스 스크롤하여 전체 보기)";
+                }
                 lightbox.classList.add("active");
-                document.body.style.overflow = "hidden"; // Prevent background scroll
-            });
-
-            const closeLightbox = () => {
-                lightbox.classList.remove("active");
-                document.body.style.overflow = ""; // Restore scroll
-            };
-
-            lightboxClose.addEventListener("click", closeLightbox);
-            
-            // Close lightbox on click outside the image
-            lightbox.addEventListener("click", (e) => {
-                if (e.target === lightbox || e.target.classList.contains("lightbox-content-wrapper")) {
-                    closeLightbox();
-                }
-            });
-
-            // Close lightbox on Escape key
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && lightbox.classList.contains("active")) {
-                    closeLightbox();
-                }
+                document.body.style.overflow = "hidden";
             });
         }
+    });
+
+    // Setup lightbox for certificate cards (HTML cloned overlays)
+    const certificateWrappers = document.querySelectorAll(".certificate-wrapper");
+    certificateWrappers.forEach(wrapper => {
+        if (lightbox && lightboxScrollContainer) {
+            wrapper.addEventListener("click", () => {
+                const card = wrapper.querySelector(".certificate-card");
+                if (!card) return;
+
+                // Clear container and clone card
+                lightboxScrollContainer.innerHTML = '';
+                const clonedCard = card.cloneNode(true);
+                // Make the cloned card styled nicely inside the lightbox
+                clonedCard.style.maxWidth = "500px";
+                clonedCard.style.transform = "none";
+                clonedCard.style.boxShadow = "none";
+                lightboxScrollContainer.appendChild(clonedCard);
+
+                if (lightboxCaption) {
+                    const titleText = card.querySelector(".cert-title") ? card.querySelector(".cert-title").textContent : "확인서";
+                    lightboxCaption.textContent = titleText + " 상세 보기";
+                }
+                lightbox.classList.add("active");
+                document.body.style.overflow = "hidden";
+            });
+        }
+    });
+
+    // Universal Lightbox Close Logic
+    if (lightbox && lightboxClose) {
+        const closeLightbox = () => {
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "";
+        };
+
+        lightboxClose.addEventListener("click", closeLightbox);
+        
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox || e.target.classList.contains("lightbox-content-wrapper")) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && lightbox.classList.contains("active")) {
+                closeLightbox();
+            }
+        });
     }
 });
