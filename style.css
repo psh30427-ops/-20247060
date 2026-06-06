@@ -848,3 +848,227 @@ footer .container {
 .bg-light {
     background-color: #f8fafc;
 }
+
+/* History Assets Section Styles */
+#history-assets {
+    padding: 80px 0;
+    background-color: white;
+}
+.flex-column {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.assets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-top: 20px;
+}
+.assets-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.assets-item h3 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Certificate Overlay Styling with Container Queries */
+.certificate-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.certificate-card {
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.414;
+    background-image: url('certificate.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(2, 62, 138, 0.15);
+    border: 1px solid rgba(2, 62, 138, 0.1);
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #111;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+}
+.certificate-wrapper:hover .certificate-card {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(2, 62, 138, 0.25);
+}
+.certificate-wrapper .hover-badge {
+    opacity: 0.85;
+    bottom: 12px;
+}
+.certificate-wrapper:hover .hover-badge {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+}
+
+/* Certificate Text Layout */
+.cert-no {
+    position: absolute;
+    top: 7.2%;
+    right: 8.5%;
+    font-size: 2.8cqw;
+    color: #555;
+    font-weight: 300;
+}
+.cert-serial {
+    position: absolute;
+    top: 14.5%;
+    left: 8.5%;
+    font-size: 3.2cqw;
+    font-weight: 500;
+    color: #222;
+}
+.cert-title {
+    position: absolute;
+    top: 19.8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 83%;
+    text-align: center;
+    font-size: 5cqw;
+    font-weight: 700;
+    letter-spacing: 0.1cqw;
+    color: #000;
+    padding-bottom: 2%;
+}
+.cert-details {
+    position: absolute;
+    top: 31.5%;
+    left: 8.5%;
+    width: 83%;
+    display: flex;
+    flex-direction: column;
+    gap: 3.8cqw;
+}
+.cert-row {
+    display: flex;
+    font-size: 3.7cqw;
+    line-height: 1.4;
+    align-items: flex-start;
+}
+.cert-label {
+    width: 20%;
+    font-weight: 700;
+    color: #000;
+    text-align-last: justify;
+    margin-right: 2%;
+}
+.cert-value {
+    width: 78%;
+    font-weight: 500;
+    color: #222;
+    word-break: keep-all;
+}
+.cert-body {
+    position: absolute;
+    top: 60.5%;
+    left: 8.5%;
+    width: 83%;
+    font-size: 3.8cqw;
+    line-height: 1.8;
+    text-align: justify;
+    text-indent: 4cqw;
+    font-weight: 500;
+    color: #222;
+    word-break: keep-all;
+}
+.cert-date {
+    position: absolute;
+    top: 78.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4cqw;
+    font-weight: 700;
+    letter-spacing: 0.2cqw;
+    color: #111;
+}
+
+@media (max-width: 992px) {
+    .assets-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .assets-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+/* KC Certificate Styles */
+#kc-card {
+    background-image: url('kc.png');
+}
+
+/* ISO 9001 Certificate Styles */
+#iso9001-card {
+    background-image: url('iso9001.webp');
+}
+.kc-paper-size {
+    display: none;
+}
+
+/* History layout customization for single line map */
+.history-map-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+}
+.history-map-wrapper h3 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Certificate Download Actions */
+.certificate-actions {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn-cert-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 119, 182, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-cert-download:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 119, 182, 0.25);
+    color: white;
+}
+.btn-cert-download i {
+    font-size: 1.1rem;
+}
+
