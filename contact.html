@@ -60,7 +60,7 @@
                             <span>24시간 접수 가능, 확인 후 답변 드립니다.</span>
                         </div>
                     </div>
-                    <form class="contact-form" onsubmit="event.preventDefault(); alert('문의가 성공적으로 접수되었습니다. 담당자가 곧 연락드리겠습니다.');">
+                    <form id="contact-form" class="contact-form">
                         <div class="form-group">
                             <label for="name">이름 / 회사명</label>
                             <input type="text" id="name" name="name" required placeholder="홍길동 / (주)OO기업">
@@ -87,7 +87,75 @@
                 </div>
             </div>
         </section>
+
+        <section id="inquiry-board" class="section border-top bg-light">
+            <div class="container flex-column">
+                <div class="section-header reveal">
+                    <h2>문의 접수 확인</h2>
+                    <p>접수된 문의 내역을 확인하실 수 있습니다</p>
+                </div>
+
+                <div class="inquiry-search reveal">
+                    <div class="inquiry-search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="inquiry-search" placeholder="접수번호 또는 이름으로 검색">
+                    </div>
+                </div>
+
+                <div class="inquiry-board reveal">
+                    <div class="inquiry-board-header">
+                        <span class="inquiry-count">총 <strong id="inquiry-total">0</strong>건</span>
+                    </div>
+                    <div class="inquiry-table-wrapper">
+                        <table class="inquiry-table">
+                            <thead>
+                                <tr>
+                                    <th>접수번호</th>
+                                    <th>접수일시</th>
+                                    <th>이름 / 회사명</th>
+                                    <th>문의 유형</th>
+                                    <th>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiry-list">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="inquiry-empty" class="inquiry-empty hidden">
+                        <i class="fa-solid fa-inbox"></i>
+                        <p>접수된 문의가 없습니다.</p>
+                        <span>위 양식을 작성하여 문의를 접수해 주세요.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <div id="inquiry-success-modal" class="inquiry-modal hidden">
+        <div class="inquiry-modal-content">
+            <div class="inquiry-modal-icon success">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>문의가 접수되었습니다</h3>
+            <p class="inquiry-modal-desc">담당자가 확인 후 연락드리겠습니다.</p>
+            <div class="inquiry-modal-number">
+                <span>접수번호</span>
+                <strong id="success-inquiry-id"></strong>
+            </div>
+            <button type="button" id="inquiry-success-close" class="btn btn-primary btn-block">접수 내역 확인하기</button>
+        </div>
+    </div>
+
+    <div id="inquiry-detail-modal" class="inquiry-modal hidden">
+        <div class="inquiry-modal-content inquiry-detail-content">
+            <button type="button" id="inquiry-detail-close" class="inquiry-modal-close" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3>문의 상세</h3>
+            <dl class="inquiry-detail-list" id="inquiry-detail-body">
+            </dl>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
@@ -110,5 +178,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="contact.js"></script>
 </body>
 </html>
