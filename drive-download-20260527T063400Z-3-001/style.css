@@ -344,6 +344,16 @@ footer .container {
     color: #666;
     font-weight: 300;
 }
+.section-header-left {
+    text-align: left;
+}
+.section-header-left h2::after {
+    left: 0;
+    transform: none;
+}
+#about .section-header-left {
+    margin-left: -40px;
+}
 .grid-2 {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;

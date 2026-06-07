@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주) 비에이텍 | 유지관리 지침서</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><i class="fa-solid fa-water"></i> (주) 비에이텍</a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="about.html">회사소개</a></li>
+                    <li><a href="history.html">업력</a></li>
+                    <li><a href="facilities.html" class="active">장비/시설</a></li>
+                    <li><a href="location.html">오시는 길</a></li>
+                    <li><a href="contact.html">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main guide-viewer-main">
+        <section class="section guide-viewer-section">
+            <div class="container flex-column">
+                <div class="guide-viewer-header reveal">
+                    <a href="facilities.html" class="guide-back-link">
+                        <i class="fa-solid fa-arrow-left"></i> 장비/시설로 돌아가기
+                    </a>
+                    <h2 id="guide-title">유지관리 지침서</h2>
+                </div>
+
+                <div id="guide-pdf-view" class="guide-viewer-frame reveal hidden">
+                    <iframe id="pdf-frame" title="지침서 PDF 뷰어" class="guide-pdf-iframe"></iframe>
+                </div>
+
+                <div id="guide-hwp-view" class="guide-hwp-panel reveal hidden">
+                    <div class="guide-hwp-content">
+                        <div class="guide-hwp-icon">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <h3 id="hwp-title">유지관리 지침서</h3>
+                        <p class="guide-hwp-desc">
+                            이 지침서는 HWP(한글) 형식입니다. 브라우저에서는 직접 미리보기가 지원되지 않으므로
+                            아래 버튼을 눌러 파일을 다운로드한 뒤 한글 뷰어에서 확인해 주세요.
+                        </p>
+                        <a id="hwp-download" href="#" class="btn-cert-download" download>
+                            <i class="fa-solid fa-download"></i> 지침서 다운로드
+                        </a>
+                    </div>
+                </div>
+
+                <div id="guide-error" class="guide-error reveal hidden">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <p>지침서를 찾을 수 없습니다.</p>
+                    <a href="facilities.html" class="btn-cert-download">장비/시설 페이지로 이동</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fa-solid fa-water"></i> (주) 비에이텍</h2>
+                    <p>맑고 깨끗한 물의 흐름, 비에이텍이 만듭니다.</p>
+                </div>
+                <div class="footer-info">
+                    <p>상호명: (주) 비에이텍 | 대표자: 조세연</p>
+                    <p>사업자등록번호: 123-45-67890</p>
+                    <p>주소: 강원특별자치도 춘천시 퇴계공단2길 64 (퇴계동)</p>
+                    <p>TEL: 033-248-1111 | FAX: 033-248-1234 | 이메일: info@batech.co.kr</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 (주) 비에이텍. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="guide-viewer.js"></script>
+</body>
+</html>

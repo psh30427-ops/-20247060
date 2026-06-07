@@ -344,6 +344,16 @@ footer .container {
     color: #666;
     font-weight: 300;
 }
+.section-header-left {
+    text-align: left;
+}
+.section-header-left h2::after {
+    left: 0;
+    transform: none;
+}
+#about .section-header-left {
+    margin-left: -40px;
+}
 .grid-2 {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -1070,5 +1080,200 @@ footer .container {
 }
 .btn-cert-download i {
     font-size: 1.1rem;
+}
+
+/* Helper */
+.hidden {
+    display: none !important;
+}
+.border-top {
+    border-top: 1px solid rgba(0, 119, 182, 0.08);
+}
+
+/* Maintenance Guide Cards */
+.guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.guide-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 119, 182, 0.08);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    color: var(--text-color);
+}
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 119, 182, 0.12);
+    color: var(--text-color);
+}
+.guide-card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .guide-card-icon {
+    transform: scale(1.08);
+}
+.guide-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+}
+.guide-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 16px;
+}
+.guide-card-action {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+.guide-card-action i {
+    transition: transform 0.3s ease;
+}
+.guide-card:hover .guide-card-action i {
+    transform: translateX(4px);
+}
+
+@media (max-width: 992px) {
+    .guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .guides-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Guide Viewer Page */
+.guide-viewer-main {
+    background-color: #f0f8ff;
+}
+.guide-viewer-section {
+    padding: 40px 0 80px;
+}
+.guide-viewer-header {
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 24px;
+}
+.guide-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    transition: color 0.3s ease;
+}
+.guide-back-link:hover {
+    color: var(--primary-dark);
+}
+.guide-viewer-header h2 {
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+.guide-viewer-frame {
+    width: 100%;
+    max-width: 1100px;
+    height: calc(100vh - 280px);
+    min-height: 500px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 119, 182, 0.1);
+    border: 1px solid rgba(0, 119, 182, 0.1);
+    overflow: hidden;
+}
+.guide-pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.guide-hwp-panel {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 119, 182, 0.1);
+    border: 1px solid rgba(0, 119, 182, 0.1);
+    padding: 48px 32px;
+}
+.guide-hwp-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.guide-hwp-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+}
+.guide-hwp-content h3 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+.guide-hwp-desc {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    word-break: keep-all;
+}
+.guide-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 48px;
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+}
+.guide-error i {
+    font-size: 2.5rem;
+    color: #e74c3c;
+}
+.guide-error p {
+    font-size: 1.1rem;
+    color: #555;
 }
 
