@@ -49,6 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const lightboxScrollContainer = document.querySelector(".lightbox-scroll-container");
     const lightboxCaption = document.querySelector(".lightbox-caption");
 
+    // Facilities tab switcher
+    const facilityTabs = document.querySelectorAll(".facility-tab");
+    const facilityPanels = document.querySelectorAll(".facility-panel");
+
+    facilityTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            const target = tab.dataset.tab;
+
+            facilityTabs.forEach(item => item.classList.remove("active"));
+            facilityPanels.forEach(panel => panel.classList.remove("active"));
+
+            tab.classList.add("active");
+            const panel = document.getElementById(`panel-${target}`);
+            if (panel) {
+                panel.classList.add("active");
+            }
+        });
+    });
+
     // Recalculate scrolling speed and setup listeners for each scrolling container
     scrollingContainers.forEach(container => {
         const img = container.querySelector(".scrolling-img");
@@ -100,6 +119,61 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Setup lightbox for facility gallery images
+    const facilityGalleryItems = document.querySelectorAll(".facility-gallery-item");
+    facilityGalleryItems.forEach(item => {
+        if (lightbox && lightboxScrollContainer) {
+            item.addEventListener("click", () => {
+                const img = item.querySelector("img");
+                const src = item.dataset.img || (img ? img.src : "");
+                const caption = item.dataset.caption || (img ? img.alt : "");
+                if (!src) return;
+
+                lightboxScrollContainer.innerHTML = "";
+                const newImg = document.createElement("img");
+                newImg.src = src;
+                newImg.alt = caption;
+                newImg.className = "lightbox-img";
+                lightboxScrollContainer.appendChild(newImg);
+
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = img.alt + " 상세 보기";
+                }
+                lightbox.classList.add("active");
+                document.body.style.overflow = "hidden";
+            });
+        }
+    });
+
+    // Setup lightbox for company promotional videos
+    const videoLightboxTriggers = document.querySelectorAll(".video-lightbox-trigger");
+    videoLightboxTriggers.forEach(trigger => {
+        if (lightbox && lightboxScrollContainer) {
+            trigger.addEventListener("click", () => {
+                const src = trigger.dataset.video;
+                const caption = trigger.dataset.caption || "회사 홍보 영상";
+                if (!src) return;
+
+                lightboxScrollContainer.innerHTML = "";
+                lightboxScrollContainer.classList.add("video-mode");
+                const newVideo = document.createElement("video");
+                newVideo.src = src;
+                newVideo.className = "lightbox-video";
+                newVideo.controls = true;
+                newVideo.autoplay = true;
+                newVideo.playsInline = true;
+                lightboxScrollContainer.appendChild(newVideo);
+
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = caption;
+                }
+                lightbox.classList.add("active");
+                document.body.style.overflow = "hidden";
+                newVideo.play().catch(() => {});
+            });
+        }
+    });
+
     // Setup lightbox for certificate cards (HTML cloned overlays)
     const certificateWrappers = document.querySelectorAll(".certificate-wrapper");
     certificateWrappers.forEach(wrapper => {
@@ -132,6 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const closeLightbox = () => {
             lightbox.classList.remove("active");
             document.body.style.overflow = "";
+            if (lightboxScrollContainer) {
+                lightboxScrollContainer.querySelectorAll("video").forEach(video => {
+                    video.pause();
+                    video.removeAttribute("src");
+                    video.load();
+                });
+                lightboxScrollContainer.innerHTML = "";
+                lightboxScrollContainer.classList.remove("video-mode");
+            }
         };
 
         lightboxClose.addEventListener("click", closeLightbox);

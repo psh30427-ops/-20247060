@@ -39,29 +39,170 @@
                     <h2>장비 및 시설</h2>
                     <p>최고의 제품을 생산하기 위한 최첨단 설비</p>
                 </div>
-                <div class="gallery-grid reveal">
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fa-solid fa-industry"></i>
-                            <span>첨단 제조 라인</span>
+                <!-- 카테고리 탭 -->
+                <div class="facility-tabs reveal">
+                    <button class="facility-tab active" data-tab="manufacturing">
+                        <i class="fa-solid fa-industry"></i> 첨단 제조 라인
+                    </button>
+                    <button class="facility-tab" data-tab="quality">
+                        <i class="fa-solid fa-microscope"></i> 품질 테스트 연구소
+                    </button>
+                    <button class="facility-tab" data-tab="logistics">
+                        <i class="fa-solid fa-truck-fast"></i> 물류 및 출하 시설
+                    </button>
+                    <button class="facility-tab" data-tab="repair">
+                        <i class="fa-solid fa-wrench"></i> 전문 수리 센터
+                    </button>
+                </div>
+
+                <!-- 첨단 제조 라인 -->
+                <div class="facility-panel active reveal" id="panel-manufacturing">
+                    <div class="facility-panel-header">
+                        <i class="fa-solid fa-industry"></i>
+                        <div>
+                            <h3>첨단 제조 라인</h3>
+                            <p>펌프 제작 작업장 및 첨단 설비</p>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fa-solid fa-microscope"></i>
-                            <span>품질 테스트 연구소</span>
+                    <div class="facility-photo-grid">
+                        <div class="facility-photo-item main-photo facility-gallery-item" data-img="facilities-images/manufacturing.jpg" data-caption="펌프 제작 작업장 전경">
+                            <img src="facilities-images/manufacturing.jpg" alt="펌프 제작 작업장 전경">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">펌프 제작 작업장 전경</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_01.jpg" data-caption="펌프제작 작업장 내부">
+                            <img src="facilities-images/photo_01.jpg" alt="펌프제작 작업장 내부">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">펌프제작 작업장 내부</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_05.jpg" data-caption="공장 전체 내부">
+                            <img src="facilities-images/photo_05.jpg" alt="공장 전체 내부">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">공장 전체 내부</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_14.jpg" data-caption="천장 호이스트 크레인 (1,900kg)">
+                            <img src="facilities-images/photo_14.jpg" alt="천장 호이스트 크레인">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">호이스트 크레인 (1,900kg)</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_16.jpg" data-caption="AutoCAD 기반 펌프 설계">
+                            <img src="facilities-images/photo_16.jpg" alt="AutoCAD 기반 펌프 설계">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">AutoCAD 기반 펌프 설계</span>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            <span>물류 및 출하 시설</span>
+                </div>
+
+                <!-- 품질 테스트 연구소 -->
+                <div class="facility-panel reveal" id="panel-quality">
+                    <div class="facility-panel-header">
+                        <i class="fa-solid fa-microscope"></i>
+                        <div>
+                            <h3>품질 테스트 연구소</h3>
+                            <p>성능시험장 및 자재관리 설비</p>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <div class="gallery-placeholder">
-                            <i class="fa-solid fa-wrench"></i>
-                            <span>전문 수리 센터</span>
+                    <div class="facility-photo-grid">
+                        <div class="facility-photo-item main-photo facility-gallery-item" data-img="facilities-images/quality.jpg" data-caption="성능시험장 계측·제어 설비">
+                            <img src="facilities-images/quality.jpg" alt="성능시험장 계측·제어 설비">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">성능시험장 계측·제어 설비</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_06.jpg" data-caption="성능시험장 배관 시스템">
+                            <img src="facilities-images/photo_06.jpg" alt="성능시험장 배관 시스템">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">성능시험장 배관 시스템</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_02.jpg" data-caption="자재관리실">
+                            <img src="facilities-images/photo_02.jpg" alt="자재관리실">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">자재관리실</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 물류 및 출하 시설 -->
+                <div class="facility-panel reveal" id="panel-logistics">
+                    <div class="facility-panel-header">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <div>
+                            <h3>물류 및 출하 시설</h3>
+                            <p>출고대기소 및 출하 대기 제품</p>
+                        </div>
+                    </div>
+                    <div class="facility-photo-grid">
+                        <div class="facility-photo-item main-photo facility-gallery-item" data-img="facilities-images/logistics.jpg" data-caption="출고대기소 및 출하 대기 제품">
+                            <img src="facilities-images/logistics.jpg" alt="출고대기소 및 출하 대기 제품">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">출고대기소 및 출하 대기 제품</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_03.jpg" data-caption="출고 대기 펌프 설비">
+                            <img src="facilities-images/photo_03.jpg" alt="출고 대기 펌프 설비">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">출고 대기 펌프 설비</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_04.jpg" data-caption="비에이텍(주) 본사 전경">
+                            <img src="facilities-images/photo_04.jpg" alt="비에이텍(주) 본사 전경">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">비에이텍(주) 본사 전경</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 전문 수리 센터 -->
+                <div class="facility-panel reveal" id="panel-repair">
+                    <div class="facility-panel-header">
+                        <i class="fa-solid fa-wrench"></i>
+                        <div>
+                            <h3>전문 수리 센터</h3>
+                            <p>정밀 가공 및 수리 전문 장비</p>
+                        </div>
+                    </div>
+                    <div class="facility-photo-grid">
+                        <div class="facility-photo-item main-photo facility-gallery-item" data-img="facilities-images/repair.jpg" data-caption="수리 작업 공간 전경">
+                            <img src="facilities-images/repair.jpg" alt="수리 작업 공간 전경">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">수리 작업 공간 전경</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_07.jpg" data-caption="밀링머신">
+                            <img src="facilities-images/photo_07.jpg" alt="밀링머신">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">밀링머신</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_08.jpg" data-caption="선반기계">
+                            <img src="facilities-images/photo_08.jpg" alt="선반기계">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">선반기계</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_09.jpg" data-caption="드릴프레스">
+                            <img src="facilities-images/photo_09.jpg" alt="드릴프레스">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">드릴프레스</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_10.jpg" data-caption="아크 용접기 (ASEA-180)">
+                            <img src="facilities-images/photo_10.jpg" alt="아크 용접기">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">아크 용접기 (ASEA-180)</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_11.jpg" data-caption="TIG 용접기 (Perfect 300PT)">
+                            <img src="facilities-images/photo_11.jpg" alt="TIG 용접기">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">TIG 용접기 (Perfect 300PT)</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_12.jpg" data-caption="밴드쏘 (금속 절단기)">
+                            <img src="facilities-images/photo_12.jpg" alt="밴드쏘">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">밴드쏘 (금속 절단기)</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_13.jpg" data-caption="벤치 그라인더">
+                            <img src="facilities-images/photo_13.jpg" alt="벤치 그라인더">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">벤치 그라인더</span>
+                        </div>
+                        <div class="facility-photo-item facility-gallery-item" data-img="facilities-images/photo_15.jpg" data-caption="플라즈마 절단기 (AirComp+70)">
+                            <img src="facilities-images/photo_15.jpg" alt="플라즈마 절단기">
+                            <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                            <span class="photo-label">플라즈마 절단기 (AirComp+70)</span>
                         </div>
                     </div>
                 </div>
@@ -135,6 +276,18 @@
             </div>
         </div>
     </footer>
+
+    <div id="lightbox" class="lightbox-modal">
+        <div class="lightbox-content-wrapper">
+            <button id="lightbox-close" class="lightbox-close-btn" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="lightbox-scroll-container">
+                <img src="" alt="" class="lightbox-img">
+            </div>
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
