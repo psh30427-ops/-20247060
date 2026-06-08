@@ -315,3 +315,22 @@
         padding: 30px 24px;
     }
 }
+
+/* Org Chart */
+.section-alt {
+    background: #e8f4fd;
+}
+
+.org-chart-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,119,182,0.12);
+}
+
+.org-chart-img {
+    width: 100%;
+    min-width: 700px;
+    display: block;
+    border-radius: 16px;
+}
