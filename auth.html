@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주) 비에이텍 | 로그인 / 회원가입</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><i class="fa-solid fa-water"></i> (주) 비에이텍</a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="about.html">회사소개</a></li>
+                    <li><a href="history.html">업력</a></li>
+                    <li><a href="facilities.html">장비/시설</a></li>
+                    <li><a href="location.html">오시는 길</a></li>
+                    <li><a href="contact.html">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="nav-auth-buttons">
+                <a href="auth.html" class="btn-auth btn-login active-auth">로그인</a>
+                <a href="auth.html?tab=signup" class="btn-auth btn-signup">회원가입</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="login-tab" onclick="switchTab('login')">로그인</button>
+                <button class="auth-tab" id="signup-tab" onclick="switchTab('signup')">회원가입</button>
+            </div>
+
+            <!-- 로그인 폼 -->
+            <div class="auth-form-wrapper" id="login-form">
+                <div class="auth-header">
+                    <i class="fa-solid fa-water auth-icon"></i>
+                    <h2>로그인</h2>
+                    <p>비에이텍 회원 서비스에 오신 것을 환영합니다.</p>
+                </div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fa-solid fa-envelope"></i> 이메일</label>
+                        <input type="email" id="login-email" placeholder="이메일을 입력하세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password"><i class="fa-solid fa-lock"></i> 비밀번호</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" placeholder="비밀번호를 입력하세요" required>
+                            <button type="button" class="toggle-pw" onclick="togglePassword('login-password', this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember-me"> 로그인 유지
+                        </label>
+                        <a href="#" class="forgot-pw">비밀번호 찾기</a>
+                    </div>
+                    <button type="submit" class="btn-submit">로그인</button>
+                </form>
+                <p class="switch-hint">계정이 없으신가요? <a href="#" onclick="switchTab('signup')">회원가입</a></p>
+            </div>
+
+            <!-- 회원가입 폼 -->
+            <div class="auth-form-wrapper hidden" id="signup-form">
+                <div class="auth-header">
+                    <i class="fa-solid fa-user-plus auth-icon"></i>
+                    <h2>회원가입</h2>
+                    <p>비에이텍 회원이 되시면 다양한 서비스를 이용하실 수 있습니다.</p>
+                </div>
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signup-name"><i class="fa-solid fa-user"></i> 이름</label>
+                        <input type="text" id="signup-name" placeholder="이름을 입력하세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email"><i class="fa-solid fa-envelope"></i> 이메일</label>
+                        <input type="email" id="signup-email" placeholder="이메일을 입력하세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-phone"><i class="fa-solid fa-phone"></i> 연락처</label>
+                        <input type="tel" id="signup-phone" placeholder="연락처를 입력하세요 (예: 010-0000-0000)">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password"><i class="fa-solid fa-lock"></i> 비밀번호</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-password" placeholder="비밀번호 (8자 이상)" required minlength="8">
+                            <button type="button" class="toggle-pw" onclick="togglePassword('signup-password', this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password-confirm"><i class="fa-solid fa-lock"></i> 비밀번호 확인</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-password-confirm" placeholder="비밀번호를 다시 입력하세요" required>
+                            <button type="button" class="toggle-pw" onclick="togglePassword('signup-password-confirm', this)">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="pw-match-msg" id="pw-match-msg"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agree-terms" required>
+                            <a href="#" class="terms-link">이용약관</a> 및 <a href="#" class="terms-link">개인정보처리방침</a>에 동의합니다.
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit">회원가입</button>
+                </form>
+                <p class="switch-hint">이미 계정이 있으신가요? <a href="#" onclick="switchTab('login')">로그인</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fa-solid fa-water"></i> (주) 비에이텍</h2>
+                    <p>맑고 깨끗한 물의 흐름, 비에이텍이 만듭니다.</p>
+                </div>
+                <div class="footer-info">
+                    <p>상호명: (주) 비에이텍</p>
+                    <p>주소: 춘천시 퇴계로 1번지</p>
+                    <p>TEL: 033-264-9243 | FAX: 033-251-5747 | 담당자: aaa@naver.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 (주) 비에이텍. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
