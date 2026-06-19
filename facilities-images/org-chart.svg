@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="'Noto Sans KR', 'Malgun Gothic', sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d6a9f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ceoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e4d78;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a7abf;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="deptGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f6b3a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2ea855;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="deptGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7a4012;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c06820;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="deptGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5a1a78;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9030bf;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#00000030"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#f0f4f8" rx="16"/>
+
+  <!-- Title Bar -->
+  <rect x="0" y="0" width="900" height="70" fill="url(#headerGrad)" rx="16"/>
+  <rect x="0" y="54" width="900" height="16" fill="url(#headerGrad)"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="700" fill="white" letter-spacing="10">조  직  도</text>
+
+  <!-- Company Info Row -->
+  <rect x="30" y="85" width="840" height="36" fill="#1a3a5c" rx="8" filter="url(#shadow)"/>
+  <text x="200" y="108" text-anchor="middle" font-size="13" fill="#a8d8ff">상호: 비에이텍㈜</text>
+  <text x="450" y="108" text-anchor="middle" font-size="13" fill="#a8d8ff">전화번호: 033-264-9243</text>
+  <text x="700" y="108" text-anchor="middle" font-size="13" fill="#a8d8ff">팩스번호: 033-251-5747</text>
+
+  <!-- CEO Box -->
+  <rect x="325" y="142" width="250" height="72" fill="url(#ceoGrad)" rx="12" filter="url(#shadow)"/>
+  <rect x="325" y="142" width="250" height="28" fill="#ffffff20" rx="12"/>
+  <rect x="325" y="156" width="250" height="14" fill="#ffffff20"/>
+  <text x="450" y="162" text-anchor="middle" font-size="14" font-weight="700" fill="white">대  표  이  사</text>
+  <text x="450" y="196" text-anchor="middle" font-size="18" font-weight="700" fill="white">조  세  연</text>
+
+  <!-- Vertical line from CEO -->
+  <line x1="450" y1="214" x2="450" y2="250" stroke="#2d6a9f" stroke-width="2.5" stroke-dasharray="6,3"/>
+
+  <!-- Horizontal connector line -->
+  <line x1="130" y1="250" x2="770" y2="250" stroke="#2d6a9f" stroke-width="2.5"/>
+
+  <!-- Vertical lines to departments -->
+  <line x1="130" y1="250" x2="130" y2="282" stroke="#1f6b3a" stroke-width="2.5"/>
+  <line x1="450" y1="250" x2="450" y2="282" stroke="#7a4012" stroke-width="2.5"/>
+  <line x1="770" y1="250" x2="770" y2="282" stroke="#5a1a78" stroke-width="2.5"/>
+
+  <!-- Dept 1: 생산부 -->
+  <rect x="30" y="282" width="200" height="60" fill="url(#deptGrad1)" rx="10" filter="url(#shadow)"/>
+  <text x="130" y="307" text-anchor="middle" font-size="14" font-weight="700" fill="white">생   산   부</text>
+  <text x="130" y="330" text-anchor="middle" font-size="11" fill="#d0ffd0">제품생산 · 원자재구입</text>
+
+  <!-- Dept 2: 관리부 -->
+  <rect x="350" y="282" width="200" height="60" fill="url(#deptGrad2)" rx="10" filter="url(#shadow)"/>
+  <text x="450" y="307" text-anchor="middle" font-size="14" font-weight="700" fill="white">관   리   부</text>
+  <text x="450" y="330" text-anchor="middle" font-size="11" fill="#ffe0c0">계약 및 공정관리</text>
+
+  <!-- Dept 3: 품질보증부 -->
+  <rect x="670" y="282" width="200" height="60" fill="url(#deptGrad3)" rx="10" filter="url(#shadow)"/>
+  <text x="770" y="307" text-anchor="middle" font-size="14" font-weight="700" fill="white">품 질 보 증 부</text>
+  <text x="770" y="330" text-anchor="middle" font-size="11" fill="#e8c0ff">품질관리 및 A/S</text>
+
+  <!-- Vertical lines from depts to members -->
+  <line x1="130" y1="342" x2="130" y2="374" stroke="#1f6b3a" stroke-width="2"/>
+  <line x1="450" y1="342" x2="450" y2="374" stroke="#7a4012" stroke-width="2"/>
+  <line x1="770" y1="342" x2="770" y2="374" stroke="#5a1a78" stroke-width="2"/>
+
+  <!-- Member 1: 생산부 - 정충구 부장 -->
+  <rect x="55" y="374" width="150" height="58" fill="white" rx="8" filter="url(#shadow)" stroke="#1f6b3a" stroke-width="1.5"/>
+  <rect x="55" y="374" width="150" height="22" fill="#e8f8ee" rx="8"/>
+  <rect x="55" y="388" width="150" height="8" fill="#e8f8ee"/>
+  <text x="130" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#1f6b3a">부  장</text>
+  <text x="130" y="417" text-anchor="middle" font-size="15" font-weight="700" fill="#1a3a2a">정  충  구</text>
+
+  <!-- Member 2: 관리부 - 이원석 이사 -->
+  <rect x="375" y="374" width="150" height="58" fill="white" rx="8" filter="url(#shadow)" stroke="#7a4012" stroke-width="1.5"/>
+  <rect x="375" y="374" width="150" height="22" fill="#fff4e8" rx="8"/>
+  <rect x="375" y="388" width="150" height="8" fill="#fff4e8"/>
+  <text x="450" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#7a4012">이  사</text>
+  <text x="450" y="417" text-anchor="middle" font-size="15" font-weight="700" fill="#3a2010">이  원  석</text>
+
+  <!-- Member 3: 품질보증부 - 김홍인 실장 -->
+  <rect x="695" y="374" width="150" height="58" fill="white" rx="8" filter="url(#shadow)" stroke="#5a1a78" stroke-width="1.5"/>
+  <rect x="695" y="374" width="150" height="22" fill="#f5e8ff" rx="8"/>
+  <rect x="695" y="388" width="150" height="8" fill="#f5e8ff"/>
+  <text x="770" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#5a1a78">실  장</text>
+  <text x="770" y="417" text-anchor="middle" font-size="15" font-weight="700" fill="#2a0a38">김  홍  인</text>
+
+  <!-- 품질보증부 하위 직원 연결선 -->
+  <line x1="770" y1="432" x2="770" y2="460" stroke="#5a1a78" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Horizontal line -->
+  <line x1="695" y1="460" x2="845" y2="460" stroke="#5a1a78" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- Vertical to each sub-member -->
+  <line x1="695" y1="460" x2="695" y2="492" stroke="#5a1a78" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="845" y1="460" x2="845" y2="492" stroke="#5a1a78" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Sub-member: 김진수 과장 -->
+  <rect x="630" y="492" width="130" height="54" fill="white" rx="7" filter="url(#shadow)" stroke="#9030bf" stroke-width="1.2"/>
+  <rect x="630" y="492" width="130" height="20" fill="#f0e0ff" rx="7"/>
+  <rect x="630" y="504" width="130" height="8" fill="#f0e0ff"/>
+  <text x="695" y="507" text-anchor="middle" font-size="11" font-weight="600" fill="#5a1a78">과  장</text>
+  <text x="695" y="532" text-anchor="middle" font-size="14" font-weight="700" fill="#2a0a38">김  진  수</text>
+
+  <!-- Sub-member: 정영호 사원 -->
+  <rect x="780" y="492" width="130" height="54" fill="white" rx="7" filter="url(#shadow)" stroke="#9030bf" stroke-width="1.2"/>
+  <rect x="780" y="492" width="130" height="20" fill="#f0e0ff" rx="7"/>
+  <rect x="780" y="504" width="130" height="8" fill="#f0e0ff"/>
+  <text x="845" y="507" text-anchor="middle" font-size="11" font-weight="600" fill="#5a1a78">사  원</text>
+  <text x="845" y="532" text-anchor="middle" font-size="14" font-weight="700" fill="#2a0a38">정  영  호</text>
+
+  <!-- Footer -->
+  <rect x="0" y="586" width="900" height="34" fill="#1a3a5c" rx="16"/>
+  <rect x="0" y="586" width="900" height="16" fill="#1a3a5c"/>
+  <text x="450" y="608" text-anchor="middle" font-size="12" fill="#a8d8ff">주소: 강원특별자치도 춘천시 퇴계공단2길 64 (퇴계동)</text>
+</svg>
