@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(주) 비에이텍 | 사내 인트라넷</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // 임직원 권한 검증 보안 스크립트
+        (function() {
+            const session = JSON.parse(localStorage.getItem('batech_session') || sessionStorage.getItem('batech_session') || 'null');
+            if (!session || session.role !== 'employee') {
+                alert('임직원 전용 서비스입니다. 임직원 계정으로 로그인해주시기 바랍니다.');
+                window.location.href = 'auth.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><i class="fa-solid fa-water"></i> (주) 비에이텍 <span style="font-size:0.75rem; background:#0077b6; color:#fff; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:bold; vertical-align:middle;">인트라넷</span></a>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">홈</a></li>
+                    <li><a href="about.html">회사소개</a></li>
+                    <li><a href="history.html">업력</a></li>
+                    <li><a href="facilities.html">장비/시설</a></li>
+                    <li><a href="location.html">오시는 길</a></li>
+                    <li><a href="contact.html">문의하기</a></li>
+                </ul>
+            </nav>
+            <div class="nav-auth-buttons">
+                <!-- 자바스크립트로 세션 상태 바인딩 -->
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main bg-light">
+        <section class="section">
+            <div class="container" style="flex-direction: column; align-items: stretch; gap: 30px;">
+                <div class="section-header reveal section-header-left" style="margin-bottom: 10px;">
+                    <h2>사내 인트라넷 대시보드</h2>
+                    <p>비에이텍 임직원 업무 협업 및 고객 문의 관리 시스템</p>
+                </div>
+
+                <!-- 인트라넷 탭 메뉴 -->
+                <div class="intranet-layout" style="display: flex; gap: 30px; align-items: flex-start;">
+                    <aside class="intranet-sidebar" style="width: 250px; flex-shrink: 0; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06); padding: 20px; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 0.5px; padding: 0 10px 10px 10px; border-bottom: 1px solid #edf2f7; margin-bottom: 8px;">업무 서비스</div>
+                        <button class="intra-tab active" data-tab="notices">
+                            <i class="fa-solid fa-bullhorn"></i> 사내 공지사항
+                        </button>
+                        <button class="intra-tab" data-tab="calendar">
+                            <i class="fa-solid fa-calendar-days"></i> 사내 업무 달력
+                        </button>
+                        <button class="intra-tab" data-tab="inquiries">
+                            <i class="fa-solid fa-headset"></i> 고객 문의 관리
+                        </button>
+                        <button class="intra-tab" data-tab="notebook">
+                            <i class="fa-solid fa-book-open"></i> 사내 지식 (NotebookLM)
+                        </button>
+                    </aside>
+
+                    <div class="intranet-content" style="flex-grow: 1; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06); padding: 30px; min-height: 500px;">
+                        
+                        <!-- 1. 사내 공지사항 탭 -->
+                        <div class="intra-panel active" id="panel-notices">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #edf2f7; padding-bottom: 16px; margin-bottom: 20px;">
+                                <h3 style="font-size: 1.4rem; font-weight: 700; color: #2d3748;"><i class="fa-solid fa-bullhorn" style="color:#0077b6; margin-right:8px;"></i> 사내 공지사항</h3>
+                                <div style="display: flex; gap: 8px; max-width: 300px; width: 100%;">
+                                    <input type="text" id="notice-search" placeholder="공지사항 제목 검색..." style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 0.9rem;">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="inquiry-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead>
+                                        <tr style="background: #f7fafc; border-bottom: 2px solid #edf2f7;">
+                                            <th style="padding: 12px 16px; font-weight: 600;">번호</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">제목</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">작성부서</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">등록일</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="notice-list">
+                                        <!-- 자바스크립트로 공지 렌더링 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 2. 사내 업무 달력 탭 -->
+                        <div class="intra-panel" id="panel-calendar" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #edf2f7; padding-bottom: 16px; margin-bottom: 20px;">
+                                <h3 style="font-size: 1.4rem; font-weight: 700; color: #2d3748;"><i class="fa-solid fa-calendar-days" style="color:#0077b6; margin-right:8px;"></i> 사내 업무 달력</h3>
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <button id="prev-month" style="background: none; border: 1px solid #cbd5e0; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: background 0.2s;"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <span id="calendar-title" style="font-size: 1.25rem; font-weight: 700; color: #2d3748; min-width: 120px; text-align: center;">2026년 06월</span>
+                                    <button id="next-month" style="background: none; border: 1px solid #cbd5e0; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: background 0.2s;"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                            
+                            <!-- 달력 그리드 -->
+                            <div class="calendar-wrapper">
+                                <div class="calendar-grid-header" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 700; color: #718096; border-bottom: 1px solid #edf2f7; padding-bottom: 10px; margin-bottom: 10px;">
+                                    <div style="color: #e53e3e;">일</div>
+                                    <div>월</div>
+                                    <div>화</div>
+                                    <div>수</div>
+                                    <div>목</div>
+                                    <div>금</div>
+                                    <div style="color: #3182ce;">토</div>
+                                </div>
+                                <div id="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: minmax(100px, auto); gap: 1px; background: #edf2f7; border: 1px solid #edf2f7; border-radius: 8px; overflow: hidden;">
+                                    <!-- 날짜 블록 렌더링 -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. 고객 문의 관리 탭 -->
+                        <div class="intra-panel" id="panel-inquiries" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #edf2f7; padding-bottom: 16px; margin-bottom: 20px;">
+                                <h3 style="font-size: 1.4rem; font-weight: 700; color: #2d3748;"><i class="fa-solid fa-headset" style="color:#0077b6; margin-right:8px;"></i> 고객 문의 관리</h3>
+                                <div style="display: flex; gap: 8px; max-width: 300px; width: 100%;">
+                                    <input type="text" id="intra-inquiry-search" placeholder="접수번호 또는 고객명 검색..." style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 0.9rem;">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="inquiry-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+                                    <thead>
+                                        <tr style="background: #f7fafc; border-bottom: 2px solid #edf2f7;">
+                                            <th style="padding: 12px 16px; font-weight: 600;">접수번호</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">접수일시</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">고객명 / 회사명</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">문의 유형</th>
+                                            <th style="padding: 12px 16px; font-weight: 600;">진행 상태</th>
+                                            <th style="padding: 12px 16px; font-weight: 600; text-align: center;">관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="intra-inquiry-list">
+                                        <!-- 자바스크립트로 접수 리스트 렌더링 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="intra-inquiry-empty" class="inquiry-empty hidden" style="text-align: center; padding: 50px 0;">
+                                <i class="fa-solid fa-inbox" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 12px;"></i>
+                                <p style="font-size: 1.1rem; color: #718096; margin: 0;">접수된 고객 문의 내역이 없습니다.</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. 사내 지식 (NotebookLM) 탭 -->
+                        <div class="intra-panel" id="panel-notebook" style="display: none;">
+                            <div style="border-bottom: 2px solid #edf2f7; padding-bottom: 16px; margin-bottom: 25px;">
+                                <h3 style="font-size: 1.4rem; font-weight: 700; color: #2d3748;"><i class="fa-solid fa-book-open" style="color:#0077b6; margin-right:8px;"></i> 사내 지식 베이스 (NotebookLM)</h3>
+                            </div>
+                            <div style="background: linear-gradient(135deg, rgba(0, 119, 182, 0.03) 0%, rgba(0, 150, 199, 0.08) 100%); border-radius: 16px; border: 1px solid rgba(0, 119, 182, 0.15); padding: 35px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; box-shadow: 0 4px 12px rgba(0,119,182,0.05);">
+                                <div style="width: 80px; height: 80px; border-radius: 50%; background: #0077b6; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2.2rem; box-shadow: 0 6px 16px rgba(0, 119, 182, 0.3);">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <h4 style="font-size: 1.4rem; font-weight: 700; color: #023e8a; margin: 0;">Google NotebookLM 기반 사내 규정 조회</h4>
+                                <p style="font-size: 1.05rem; color: #4a5568; max-width: 600px; line-height: 1.7; word-break: keep-all; margin: 0;">
+                                    비에이텍의 사내 복지 규정, 인사 관리 지침서, 펌프 부품 기술 시방서 및 사내 프로세스 정보를 구글 NotebookLM을 통해 직관적으로 질문하고 신속하게 답변을 받을 수 있습니다.
+                                </p>
+                                <div style="display: flex; flex-direction: column; gap: 8px; background: #fff; padding: 16px 24px; border-radius: 12px; border: 1px solid #edf2f7; text-align: left; width: 100%; max-width: 480px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                                    <span style="font-size: 0.85rem; font-weight: 700; color: #718096; display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-lightbulb" style="color:#d69e2e;"></i> 질문 가이드 예시</span>
+                                    <ul style="font-size: 0.88rem; color: #4a5568; padding-left: 20px; line-height: 1.6; margin: 5px 0 0 0;">
+                                        <li>"부스터펌프 A/S 및 출고 검사 프로토콜이 어떻게 되나요?"</li>
+                                        <li>"2026년도 사내 연차 및 연봉 협상 규정을 알려줘."</li>
+                                        <li>"퇴계공단 공장 내 비상 대응 시 행동 지침을 알려줘."</li>
+                                    </ul>
+                                </div>
+                                <a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0077b6; color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 1rem; transition: background 0.2s, transform 0.2s; box-shadow: 0 6px 16px rgba(0, 119, 182, 0.25);">
+                                    NotebookLM 지식베이스 열기 <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 사내 공지사항 상세 모달 -->
+    <div id="notice-detail-modal" class="inquiry-modal hidden">
+        <div class="inquiry-modal-content inquiry-detail-content">
+            <button type="button" id="notice-detail-close" class="inquiry-modal-close" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 style="border-bottom: 2px solid #edf2f7; padding-bottom: 12px; margin-bottom: 15px;"><i class="fa-solid fa-circle-info" style="color:#0077b6; margin-right:6px;"></i> 사내 공지 상세</h3>
+            <div id="notice-detail-body">
+                <!-- 스크립트 바인딩 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 달력 일정 상세 모달 -->
+    <div id="cal-detail-modal" class="inquiry-modal hidden">
+        <div class="inquiry-modal-content" style="max-width: 450px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 119, 182, 0.1); color: #0077b6; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 16px auto;">
+                <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <h3 id="cal-detail-title" style="font-size: 1.25rem; font-weight: 700; color: #2d3748; margin-bottom: 8px;">일정 상세</h3>
+            <p id="cal-detail-date" style="font-size: 0.9rem; color: #718096; margin-bottom: 16px;">2026.06.10 (수)</p>
+            <div id="cal-detail-desc" style="background: #f7fafc; padding: 15px; border-radius: 8px; font-size: 0.95rem; color: #4a5568; line-height: 1.6; text-align: left; margin-bottom: 20px; border: 1px solid #edf2f7;">
+                상세 정보
+            </div>
+            <button type="button" id="cal-detail-close" class="btn btn-primary btn-block">확인</button>
+        </div>
+    </div>
+
+    <!-- 고객 문의 관리 상세 및 상태 수정 모달 -->
+    <div id="intra-inquiry-modal" class="inquiry-modal hidden">
+        <div class="inquiry-modal-content" style="max-width: 550px; text-align: left;">
+            <button type="button" id="intra-inquiry-close" class="inquiry-modal-close" aria-label="닫기">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 style="border-bottom: 2px solid #edf2f7; padding-bottom: 12px; margin-bottom: 20px;"><i class="fa-solid fa-headset" style="color:#0077b6; margin-right:6px;"></i> 고객 문의 관리</h3>
+            
+            <dl class="inquiry-detail-list" id="intra-inquiry-body" style="margin-bottom: 20px;">
+                <!-- 상세 렌더링 -->
+            </dl>
+
+            <div style="background: #f7fafc; padding: 16px; border-radius: 10px; border: 1px solid #cbd5e0; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+                <label for="update-status-select" style="font-weight: 700; font-size: 0.95rem; color: #2d3748; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-spinner" style="color:#0077b6;"></i> 진행 상태 관리
+                </label>
+                <div style="display: flex; gap: 8px; flex-grow: 1; max-width: 250px;">
+                    <select id="update-status-select" style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">
+                        <option value="접수완료">접수완료</option>
+                        <option value="처리중">처리중</option>
+                        <option value="답변완료">답변완료</option>
+                    </select>
+                    <button type="button" id="btn-save-status" style="background: #0077b6; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: background 0.2s;">저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fa-solid fa-water"></i> (주) 비에이텍</h2>
+                    <p>맑고 깨끗한 물의 흐름, 비에이텍이 만듭니다.</p>
+                </div>
+                <div class="footer-info">
+                    <p>상호명: (주) 비에이텍 | 대표자: 조세연</p>
+                    <p>사업자등록번호: 123-45-67890</p>
+                    <p>주소: 강원특별자치도 춘천시 퇴계공단2길 64 (퇴계동)</p>
+                    <p>TEL: 033-264-9243 | FAX: 033-251-5747 | 이메일: info@batech.co.kr</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 (주) 비에이텍. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="intranet.js"></script>
+</body>
+</html>

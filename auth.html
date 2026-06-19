@@ -84,6 +84,30 @@
                     <p>비에이텍 회원이 되시면 다양한 서비스를 이용하실 수 있습니다.</p>
                 </div>
                 <form onsubmit="handleSignup(event)">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label><i class="fa-solid fa-users-gear"></i> 회원 구분</label>
+                        <div class="role-selector" style="display: flex; gap: 10px; margin-top: 8px; margin-bottom: 8px;">
+                            <label style="flex: 1; border: 1px solid #cbd5e0; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 0.9rem; background: #edf2f7; transition: all 0.2s;" id="label-role-customer">
+                                <input type="radio" name="signup-role" value="customer" checked onchange="toggleRoleFields('customer')" style="accent-color: #0077b6; cursor: pointer;"> 일반 고객
+                            </label>
+                            <label style="flex: 1; border: 1px solid #cbd5e0; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 0.9rem; background: #ffffff; transition: all 0.2s;" id="label-role-employee">
+                                <input type="radio" name="signup-role" value="employee" onchange="toggleRoleFields('employee')" style="accent-color: #0077b6; cursor: pointer;"> 사내 임직원
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- 임직원 전용 입력 필드 (기본 숨김) -->
+                    <div id="employee-fields" style="display: none; background: #f7fafc; padding: 16px; border-radius: 10px; border: 1px dashed #cbd5e0; margin-bottom: 16px; flex-direction: column; gap: 12px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="signup-emp-id" style="font-weight: 600; font-size: 0.85rem;"><i class="fa-solid fa-id-card"></i> 사원번호</label>
+                            <input type="text" id="signup-emp-id" placeholder="사원번호를 입력하세요 (예: EM-001)" style="margin-top: 5px; padding: 10px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="signup-code" style="font-weight: 600; font-size: 0.85rem;"><i class="fa-solid fa-key"></i> 사내 인증코드</label>
+                            <input type="password" id="signup-code" placeholder="사내 인증코드를 입력하세요 (기본값: BATECH2026)" style="margin-top: 5px; padding: 10px;">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="signup-name"><i class="fa-solid fa-user"></i> 이름</label>
                         <input type="text" id="signup-name" placeholder="이름을 입력하세요" required>

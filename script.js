@@ -231,4 +231,38 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // 4. Map Tab Switcher
+    const mapTabs = document.querySelectorAll(".map-tab");
+    const naverLink = document.getElementById("naver-map-link");
+    const kakaoLink = document.getElementById("kakao-map-link");
+
+    if (mapTabs.length > 0 && naverLink && kakaoLink) {
+        mapTabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                const target = tab.dataset.target;
+
+                // Deactivate all tabs
+                mapTabs.forEach(t => {
+                    t.classList.remove("active");
+                    t.style.borderBottom = "3px solid transparent";
+                    t.style.color = "#718096";
+                });
+
+                // Activate clicked tab
+                tab.classList.add("active");
+                if (target === "naver") {
+                    tab.style.borderBottom = "3px solid #03C75A";
+                    tab.style.color = "#03C75A";
+                    naverLink.style.display = "block";
+                    kakaoLink.style.display = "none";
+                } else if (target === "kakao") {
+                    tab.style.borderBottom = "3px solid #FFCD00";
+                    tab.style.color = "#191919";
+                    naverLink.style.display = "none";
+                    kakaoLink.style.display = "block";
+                }
+            });
+        });
+    }
 });

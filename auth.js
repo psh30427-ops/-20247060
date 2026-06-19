@@ -1,3 +1,33 @@
+function toggleRoleFields(role) {
+    const fields = document.getElementById('employee-fields');
+    const labelCustomer = document.getElementById('label-role-customer');
+    const labelEmployee = document.getElementById('label-role-employee');
+    
+    if (role === 'employee') {
+        if (fields) fields.style.display = 'flex';
+        if (labelEmployee) labelEmployee.style.background = '#edf2f7';
+        if (labelCustomer) labelCustomer.style.background = '#ffffff';
+        const empInput = document.getElementById('signup-emp-id');
+        const codeInput = document.getElementById('signup-code');
+        if (empInput) empInput.required = false; // 임시 가입 테스트를 위해 필수 해제
+        if (codeInput) codeInput.required = false; // 임시 가입 테스트를 위해 필수 해제
+    } else {
+        if (fields) fields.style.display = 'none';
+        if (labelEmployee) labelEmployee.style.background = '#ffffff';
+        if (labelCustomer) labelCustomer.style.background = '#edf2f7';
+        const empInput = document.getElementById('signup-emp-id');
+        const codeInput = document.getElementById('signup-code');
+        if (empInput) {
+            empInput.required = false;
+            empInput.value = '';
+        }
+        if (codeInput) {
+            codeInput.required = false;
+            codeInput.value = '';
+        }
+    }
+}
+
 // Tab switching
 function switchTab(tab) {
     const loginForm = document.getElementById('login-form');
@@ -66,7 +96,7 @@ function handleLogin(e) {
         return;
     }
 
-    const session = { email: user.email, name: user.name };
+    const session = { email: user.email, name: user.name, role: user.role || 'customer' };
     if (remember) {
         localStorage.setItem('batech_session', JSON.stringify(session));
     } else {
@@ -91,13 +121,27 @@ function handleSignup(e) {
         return;
     }
 
+    const roleEl = document.querySelector('input[name="signup-role"]:checked');
+    const role = roleEl ? roleEl.value : 'customer';
+    let empId = '';
+
+    if (role === 'employee') {
+        const empIdInput = document.getElementById('signup-emp-id');
+        empId = empIdInput ? empIdInput.value.trim() : '';
+
+        // 사원번호를 입력하지 않았거나 아무렇게 입력해도 가입이 가능하도록 설정
+        if (!empId) {
+            empId = 'EM-' + Math.floor(100 + Math.random() * 900);
+        }
+    }
+
     const users = JSON.parse(localStorage.getItem('batech_users') || '[]');
     if (users.find(u => u.email === email)) {
         showAlert('이미 가입된 이메일입니다.', 'error');
         return;
     }
 
-    users.push({ name, email, phone, password: btoa(password) });
+    users.push({ name, email, phone, password: btoa(password), role, empId });
     localStorage.setItem('batech_users', JSON.stringify(users));
 
     showAlert('회원가입이 완료되었습니다! 로그인 해주세요.', 'success');
@@ -142,9 +186,20 @@ function updateNavAuth() {
 
     if (session) {
         authBtns.innerHTML = `
-            <span class="nav-username"><i class="fa-solid fa-user-circle"></i> ${session.name}님</span>
+            <span class="nav-username"><i class="fa-solid fa-user-circle"></i> ${session.name}님 ${session.role === 'employee' ? '<small style="background:#0077b6;color:#fff;padding:2px 6px;border-radius:4px;font-size:0.75rem;margin-left:4px;font-weight:bold;">임직원</small>' : ''}</span>
             <button class="btn-logout" onclick="logout()">로그아웃</button>
         `;
+
+        // 만약 임직원 로그인 상태라면 네비게이션 메뉴에 인트라넷 링크 추가
+        const navMenu = document.querySelector('.nav-menu ul');
+        if (navMenu && session.role === 'employee') {
+            if (!document.getElementById('nav-intranet-item')) {
+                const li = document.createElement('li');
+                li.id = 'nav-intranet-item';
+                li.innerHTML = '<a href="intranet.html" id="nav-intranet">사내 인트라넷</a>';
+                navMenu.appendChild(li);
+            }
+        }
     }
 }
 
