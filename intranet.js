@@ -75,6 +75,25 @@ const MOCK_EVENTS = {
 };
 
 const INQUIRY_STORAGE_KEY = "batech_inquiries";
+const ACHIEVEMENT_STORAGE_KEY = "batech_achievements";
+const INITIAL_ACHIEVEMENTS = [
+    { no: 404, client: "홍천군", project: "농업용수(양덕원리 취수펌프) 배수관로 설치공사 진공펌프", date: "2019.06", remark: "" },
+    { no: 405, client: "춘천시상하수도사업본부", project: "2019년 상수도시설 확충공사(서면당림리 272번지일원외) 부스터펌프", date: "2019.08", remark: "" },
+    { no: 406, client: "춘천시상하수도사업본부", project: "용산정수장 샘플링펌프", date: "2019.06", remark: "" },
+    { no: 407, client: "철원군상하수도사업소", project: "김화하수처리구역(와수3처리분구) 하수관거정비사업 수중볼텍스펌프", date: "2019.05", remark: "" },
+    { no: 408, client: "춘천시상하수도사업본부", project: "근화동 유수지 지배수펌프 증설공사 수중펌프", date: "2019.06", remark: "" },
+    { no: 409, client: "강원도인재개발원", project: "본관기계실 노후펌프 교체공사", date: "2019.06", remark: "" },
+    { no: 410, client: "춘천시상하수도사업본부", project: "수중펌프", date: "2019.06", remark: "" },
+    { no: 411, client: "홍천군", project: "솔무치지구 밭기반 정비사업1차분 심정펌프", date: "2019", remark: "" },
+    { no: 412, client: "삼척시상수도사업소", project: "미로상수도 확장공사 부스터펌프", date: "2019", remark: "" },
+    { no: 413, client: "양양군상하수도사업소", project: "강현가압장 가압시설 증설공사 부스터펌프", date: "2019.08", remark: "" },
+    { no: 414, client: "양구군상하수도사업소", project: "송현 공공하수처리시설 설치공사 펌프류", date: "2019", remark: "" },
+    { no: 415, client: "양구군상하수도사업소", project: "구암 공공하수처리시설 관급자재-펌프류", date: "2019", remark: "" },
+    { no: 416, client: "양구군상하수도사업소", project: "죽곡 공공하수처리시설 관급자재-펌프류", date: "2019", remark: "" },
+    { no: 417, client: "삼척시하수도사업소", project: "읍상빗물펌프장 펌프 수리수선", date: "2019.06", remark: "" },
+    { no: 418, client: "철원군농업기술센터", project: "2019년 만경보 수중펌프", date: "2019.07", remark: "" },
+    { no: 419, client: "철원군농업기술센터", project: "2019년 철원 대마지구(대마리990번지) 수리시설 정비사업 수중펌프", date: "2019", remark: "" }
+];
 const TYPE_LABELS = {
     manufacture: "펌프 제작/구매",
     install: "설치 문의",
@@ -424,18 +443,241 @@ function closeIntraModal(modal) {
     document.body.style.overflow = "";
 }
 
+// --- achievements CRUD logic ---
+function getAchievements() {
+    try {
+        const data = localStorage.getItem(ACHIEVEMENT_STORAGE_KEY);
+        if (!data) {
+            localStorage.setItem(ACHIEVEMENT_STORAGE_KEY, JSON.stringify(INITIAL_ACHIEVEMENTS));
+            return INITIAL_ACHIEVEMENTS;
+        }
+        return JSON.parse(data);
+    } catch {
+        return INITIAL_ACHIEVEMENTS;
+    }
+}
+
+function saveAchievements(list) {
+    localStorage.setItem(ACHIEVEMENT_STORAGE_KEY, JSON.stringify(list));
+    window.dispatchEvent(new Event('storage'));
+}
+
+function renderIntraAchievements(filter = "") {
+    const listEl = document.getElementById("intra-achievement-list");
+    const emptyEl = document.getElementById("intra-achievement-empty");
+    const tableEl = document.querySelector("#panel-achievements .inquiry-table");
+    if (!listEl) return;
+
+    const list = getAchievements();
+    const keyword = filter.trim().toLowerCase();
+    const filtered = keyword
+        ? list.filter(item => 
+            item.client.toLowerCase().includes(keyword) || 
+            item.project.toLowerCase().includes(keyword)
+          )
+        : list;
+
+    const sorted = filtered.slice().sort((a, b) => parseInt(a.no) - parseInt(b.no));
+
+    if (sorted.length === 0) {
+        listEl.innerHTML = "";
+        emptyEl?.classList.remove("hidden");
+        if (tableEl) tableEl.style.display = "none";
+        return;
+    }
+
+    emptyEl?.classList.add("hidden");
+    if (tableEl) tableEl.style.display = "table";
+
+    listEl.innerHTML = sorted.map(item => `
+        <tr style="border-bottom: 1px solid #edf2f7; transition: background 0.15s;">
+            <td style="padding: 12px 16px; text-align: center; font-weight: 700; color: #4a5568;">${item.no}</td>
+            <td style="padding: 12px 16px; font-weight: 600; color: #2d3748;">${escapeHtml(item.client)}</td>
+            <td style="padding: 12px 16px; color: #4a5568;">${escapeHtml(item.project)}</td>
+            <td style="padding: 12px 16px; text-align: center; color: #718096;">${escapeHtml(item.date)}</td>
+            <td style="padding: 12px 16px; color: #718096;">${escapeHtml(item.remark || "")}</td>
+            <td style="padding: 12px 16px; text-align: center; white-space: nowrap;">
+                <button class="btn-edit-achievement" data-no="${item.no}" style="background:#0077b6; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; cursor:pointer; transition:background 0.2s; margin-right:4px;">수정</button>
+                <button class="btn-delete-achievement" data-no="${item.no}" style="background:#e53e3e; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:0.8rem; font-weight:700; cursor:pointer; transition:background 0.2s;">삭제</button>
+            </td>
+        </tr>
+    `).join("");
+
+    listEl.querySelectorAll("tr").forEach(row => {
+        row.addEventListener("mouseenter", () => row.style.background = "rgba(0,0,0,0.01)");
+        row.addEventListener("mouseleave", () => row.style.background = "none");
+    });
+
+    listEl.querySelectorAll(".btn-edit-achievement").forEach(btn => {
+        btn.addEventListener("click", () => {
+            showAchievementModal("edit", btn.dataset.no);
+        });
+    });
+
+    listEl.querySelectorAll(".btn-delete-achievement").forEach(btn => {
+        btn.addEventListener("click", () => {
+            deleteAchievement(btn.dataset.no);
+        });
+    });
+}
+
+function showAchievementModal(mode, no = null) {
+    const modal = document.getElementById("achievement-modal");
+    const titleEl = document.getElementById("achievement-modal-title");
+    const modeInput = document.getElementById("achievement-mode");
+    const originalNoInput = document.getElementById("original-no");
+    
+    const inputNo = document.getElementById("ach-no");
+    const inputClient = document.getElementById("ach-client");
+    const inputProject = document.getElementById("ach-project");
+    const inputDate = document.getElementById("ach-date");
+    const inputRemark = document.getElementById("ach-remark");
+
+    if (!modal || !modeInput || !originalNoInput) return;
+
+    modeInput.value = mode;
+
+    if (mode === "add") {
+        titleEl.textContent = "주요 사업 실적 등록";
+        originalNoInput.value = "";
+        
+        const list = getAchievements();
+        const maxNo = list.reduce((max, item) => Math.max(max, parseInt(item.no) || 0), 0);
+        inputNo.value = maxNo > 0 ? maxNo + 1 : 420;
+        inputNo.disabled = false;
+
+        inputClient.value = "";
+        inputProject.value = "";
+        inputDate.value = new Date().getFullYear().toString() + "." + String(new Date().getMonth() + 1).padStart(2, "0");
+        inputRemark.value = "";
+    } else {
+        titleEl.textContent = "주요 사업 실적 수정";
+        const item = getAchievements().find(i => String(i.no) === String(no));
+        if (!item) return;
+
+        originalNoInput.value = String(item.no);
+        inputNo.value = item.no;
+        inputNo.disabled = false;
+
+        inputClient.value = item.client;
+        inputProject.value = item.project;
+        inputDate.value = item.date;
+        inputRemark.value = item.remark || "";
+    }
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+}
+
+function handleAchievementSubmit(e) {
+    e.preventDefault();
+    const mode = document.getElementById("achievement-mode").value;
+    const originalNo = document.getElementById("original-no").value;
+    
+    const no = parseInt(document.getElementById("ach-no").value);
+    const client = document.getElementById("ach-client").value.trim();
+    const project = document.getElementById("ach-project").value.trim();
+    const date = document.getElementById("ach-date").value.trim();
+    const remark = document.getElementById("ach-remark").value.trim();
+
+    if (!no || !client || !project || !date) {
+        alert("필수 입력 값을 모두 채워주세요.");
+        return;
+    }
+
+    const list = getAchievements();
+
+    if (mode === "add" || (mode === "edit" && String(no) !== String(originalNo))) {
+        const duplicate = list.find(item => parseInt(item.no) === no);
+        if (duplicate) {
+            alert(`이미 존재하거나 등록된 실적 번호(${no})입니다. 다른 번호를 입력해주세요.`);
+            return;
+        }
+    }
+
+    if (mode === "add") {
+        list.push({ no, client, project, date, remark });
+    } else {
+        const index = list.findIndex(item => String(item.no) === String(originalNo));
+        if (index > -1) {
+            list[index] = { no, client, project, date, remark };
+        } else {
+            alert("수정할 대상을 찾을 수 없습니다.");
+            return;
+        }
+    }
+
+    saveAchievements(list);
+    renderIntraAchievements(document.getElementById("intra-achievement-search")?.value || "");
+    closeIntraModal(document.getElementById("achievement-modal"));
+
+    showToast(`실적이 성공적으로 ${mode === "add" ? "등록" : "수정"}되었습니다.`);
+}
+
+function deleteAchievement(no) {
+    if (!confirm(`번호 ${no} 실적을 정말 삭제하시겠습니까?`)) return;
+
+    const list = getAchievements();
+    const updated = list.filter(item => String(item.no) !== String(no));
+    
+    saveAchievements(updated);
+    renderIntraAchievements(document.getElementById("intra-achievement-search")?.value || "");
+    showToast(`실적이 성공적으로 삭제되었습니다.`);
+}
+
+function showToast(message) {
+    const existing = document.querySelector(".auth-alert");
+    if (existing) existing.remove();
+    
+    const alert = document.createElement("div");
+    alert.className = "auth-alert auth-alert-success";
+    alert.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+    alert.style.cssText = `
+        position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+        padding: 14px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500;
+        z-index: 9999; display: flex; align-items: center; gap: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15); background: #d4edda; color: #155724; border: 1px solid #c3e6cb;
+        animation: slideDown 0.3s ease;
+    `;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 2500);
+}
+
 // 7. Initialization
 document.addEventListener("DOMContentLoaded", () => {
     initTabs();
     renderNotices();
     renderCalendar();
     renderInquiries();
+    renderIntraAchievements();
 
     // Notice search
     const noticeSearch = document.getElementById("notice-search");
     noticeSearch?.addEventListener("input", (e) => {
         renderNotices(e.target.value);
     });
+
+    // Achievement search
+    const achSearch = document.getElementById("intra-achievement-search");
+    achSearch?.addEventListener("input", (e) => {
+        renderIntraAchievements(e.target.value);
+    });
+
+    // Achievement add modal
+    document.getElementById("btn-add-achievement")?.addEventListener("click", () => {
+        showAchievementModal("add");
+    });
+
+    const achModal = document.getElementById("achievement-modal");
+    document.getElementById("achievement-modal-close")?.addEventListener("click", () => {
+        closeIntraModal(achModal);
+    });
+    document.getElementById("btn-achievement-cancel")?.addEventListener("click", () => {
+        closeIntraModal(achModal);
+    });
+
+    // Form submit
+    document.getElementById("achievement-form")?.addEventListener("submit", handleAchievementSubmit);
 
     // Inquiry search
     const inquirySearch = document.getElementById("intra-inquiry-search");
@@ -486,7 +728,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Background clicks to close modals
-    [noticeDetailModal, calDetailModal, intraInquiryModal].forEach(modal => {
+    [noticeDetailModal, calDetailModal, intraInquiryModal, achModal].forEach(modal => {
         modal?.addEventListener("click", (e) => {
             if (e.target === modal) closeIntraModal(modal);
         });
@@ -498,6 +740,7 @@ document.addEventListener("DOMContentLoaded", () => {
             closeIntraModal(noticeDetailModal);
             closeIntraModal(calDetailModal);
             closeIntraModal(intraInquiryModal);
+            closeIntraModal(achModal);
         }
     });
 });
